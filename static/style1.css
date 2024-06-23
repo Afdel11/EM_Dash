@@ -1,0 +1,47 @@
+body {
+  background: mintcream;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: #53af57;
+  padding: 20px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+}
+
+nav ul li a:hover {
+  background: #fff;
+  color: #53af57;
+}
+
+#welcome-message {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#logo {
+  text-align: center;
+  margin-top: 30px;
+}
+
+#logo img {
+  width: 150px;
+}

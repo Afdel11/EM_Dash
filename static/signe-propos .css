@@ -1,0 +1,108 @@
+body {
+            background-color: #ece6e3;
+            color: #010909;
+            overflow-x: hidden;
+            position: relative; /* Ajout pour les bulles animées */
+        }
+
+        .navbar {
+            background-color: #f8f9fa;
+        }
+
+        .navbar-brand {
+            padding: 0;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            padding: 5px;
+        }
+        .carousel-item img {
+            max-height: 100px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .contenu {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .colorlib-bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .colorlib-bubbles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 40px;
+            height: 40px;
+            background-color: rgb(229, 245, 244);
+            bottom: -160px;
+            animation: animate 25s linear infinite;
+            transition-timing-function: linear;
+        }
+
+        .colorlib-bubbles li:nth-child(1) {
+            left: 10%;
+        }
+
+        .colorlib-bubbles li:nth-child(2) {
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 2s;
+            animation-duration: 17s;
+        }
+
+        .colorlib-bubbles li:nth-child(3) {
+            left: 25%;
+            animation-delay: 4s;
+        }
+
+        .colorlib-bubbles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-duration: 22s;
+            background-color: rgb(238, 250, 249);
+        }
+
+        .colorlib-bubbles li:nth-child(5) {
+            left: 70%;
+        }
+
+        .colorlib-bubbles li:nth-child(6) {
+            left: 80%;
+            width: 120px;
+            height: 120px;
+            animation-delay: 3s;
+            background-color: rgb(232, 248, 248);
+        }
+
+        .colorlib-bubbles li:nth-child(7) {
+            left: 32%;
+            width: 160px;
+            height: 160px;
+            animation-delay: 7s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0);
+                opacity: 1;
+                border-radius: 30%;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
