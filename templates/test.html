@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
+.navbar-brand {
+    font-weight: bold;
+}
+.card {
+    margin-bottom: 20px;
+}
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Card styles */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Card title */
+.card-title {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Card text */
+.card-text {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Grid layout */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+
+.col-md-3, .col-md-4, .col-md-8 {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.col-md-3 {
+    flex: 0 0 25%;
+}
+
+.col-md-4 {
+    flex: 0 0 33.3333%;
+}
+
+.col-md-8 {
+    flex: 0 0 66.6666%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .col-md-3, .col-md-4, .col-md-8 {
+        flex: 0 0 100%;
+    }
+}
+
+/* Chart styles */
+canvas {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Additional styles for specific elements */
+.card .card-text {
+    font-weight: bold;
+    color: #00aaff;
+}
+
+.card .card-title {
+    font-weight: normal;
+    color: #888;
+}
+
+/* Custom styles for specific sections */
+#productSalesChart {
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+#orderStatsChart {
+    height: 300px;
+}
+
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">EliteAdmin</a>
+        </nav>
+        <div class="row">
+            <div class="col-md-2 bg-dark text-white">
+                <h4>Menu</h4>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Dashboard</a>
+                    </li>
+                    <!-- Ajoute d'autres liens de navigation ici -->
+                </ul>
+            </div>
+            <div class="col-md-10">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Product Sales Chart
+    var ctx1 = document.getElementById('productSalesChart').getContext('2d');
+    var productSalesChart = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Product Sales',
+                data: [65, 59, 80, 81, 56, 55],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: true,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Order Stats Chart
+    var ctx2 = document.getElementById('orderStatsChart').getContext('2d');
+    var orderStatsChart = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['iPhone', 'iMac'],
+            datasets: [{
+                label: 'Order Stats',
+                data: [8500, 1500],
+                backgroundColor: ['#36a2eb', '#ff6384'],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+});
+
+</script>
+
+
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Order Received</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Today's Order</h6>
+                    <p class="card-text">12,000</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Tax Deduction</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Monthly Deduction</h6>
+                    <p class="card-text">$5,000</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Revenue Stats</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Today's Income</h6>
+                    <p class="card-text">$8,000</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Yearly Sales</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Yearly Income</h6>
+                    <p class="card-text">$12,000</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ajoute d'autres sections ici, comme des graphiques ou des stats supplémentaires -->
+</div>
+{% endblock %}
+
+</body>
+</html>
+
+

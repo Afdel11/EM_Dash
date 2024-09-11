@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="#" class="logo">EliteAdmin</a>
+        </div>
+        <div class="navbar-right">
+            <a href="#"><i class="fas fa-envelope"></i></a>
+            <a href="#"><i class="fas fa-bell"></i></a>
+            <a href="#"><i class="fas fa-cog"></i></a>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="https://via.placeholder.com/150x50" alt="Logo">
+        </div>
+        <div class="profile">
+            <img src="https://via.placeholder.com/50" alt="Profile Picture">
+            <p>Steave Gection</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Ecommerce</a></li>
+                <ul>
+                    <li><a href="#" class="active">Dashboard</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Products Details</a></li>
+                    <li><a href="#">Products Edit</a></li>
+                    <li><a href="#">Products Orders</a></li>
+                </ul>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="main-content">
+        <header>
+            <h1>Dashboard</h1>
+            <div class="actions">
+                <a href="#" class="btn">Create New</a>
+            </div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="card">
+                <h2>Order Received</h2>
+                <p class="value">{{ data['orders'] }}</p>
+                <p class="subtext">Today's Order</p>
+            </div>
+            <div class="card">
+                <h2>Tax Deduction</h2>
+                <p class="value">${{ data['tax_deduction'] }}</p>
+                <p class="subtext">Monthly Deduction</p>
+            </div>
+            <div class="card">
+                <h2>Tax Deduction</h2>
+                <p class="value">${{ data['tax_deduction'] }}</p>
+                <p class="subtext">Monthly Deduction</p>
+            </div>
+
+            <div class="card">
+                <h2>Revenue Stats</h2>
+                <p class="value">${{ data['revenue'] }}</p>
+                <p class="subtext">Today's Income</p>
+            </div>
+            <div class="card">
+                <h2>Yearly Sales</h2>
+                <p class="value">${{ data['yearly_sales'] }}</p>
+                <p class="subtext">Yearly Income</p>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart card">
+                <h2>Order Stats</h2>
+                <canvas id="1orderStatsChart"></canvas>
+            </div>
+            <div class="chart card">
+                <h2>Product Sales</h2>
+                <canvas id="productSalesChart"></canvas>
+            </div>
+            <div class="chart card">
+                <h2>Order Stats</h2>
+                <canvas id="orderStatsChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Example chart.js scripts
+        const ctx1 = document.getElementById('productSalesChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            }
+        });
+        const ctx2 = document.getElementById('orderStatsChart').getContext('2d');
+        const orderStatsChart = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Orders', 'Pending'],
+                datasets: [{
+                    label: 'Orders',
+                    data: [{{ data['order_stats'] }}, 1500], // Dynamically load data['order_stats']
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
